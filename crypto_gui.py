@@ -29,11 +29,11 @@ def get_user_input():
                                             {'amount': amount, 'symbol': coin, 'convert': currency})
         amount, coin = wallet['data'][0]['amount'], wallet['data'][0]['name']
         conversion_output = Text(input_box, grid=[1, 4], text='')
-        conversion_output.clear()
         amount_input_box.clear()
         coin_input_box.clear()
         currency_input_box.clear()
         for currency in wallet['data'][0]['quote']:
+            conversion_output.clear()
             price = round(wallet['data'][0]['quote'][currency]['price'], 2)
             text_string = f'{amount} {coin} is {round(price, 2)} {currency}'
             conversion_output.append(text_string)
@@ -86,9 +86,9 @@ input_box = Box(content_box, layout='grid', align='left')
 
 amount_input_label = Text(input_box, text='Amount [0.000]', grid=[0, 0], align='left')
 amount_input_box = TextBox(input_box, grid=[1, 0])
-coin_input_label = Text(input_box, text='Crypto [XMR]', grid=[0, 1], align='left')
+coin_input_label = Text(input_box, text='Crypto [XMR] or Currency ', grid=[0, 1], align='left')
 coin_input_box = TextBox(input_box, grid=[1, 1])
-currency_input_label = Text(input_box, text='Currency [EUR] ', grid=[0, 2], align='left')
+currency_input_label = Text(input_box, text='Currency [SGD] or Crypto ', grid=[0, 2], align='left')
 currency_input_box = TextBox(input_box, grid=[1, 2],)
 submit_compute_conversion = PushButton(input_box, text='Convert', grid=[2, 1], command=get_user_input)
 
