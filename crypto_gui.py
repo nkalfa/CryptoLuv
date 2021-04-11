@@ -1,5 +1,5 @@
 from guizero import App, Box, Combo, Picture, PushButton, Text, TextBox, Window
-import crypto_to_euro as crypto
+import crypto_to_fiat as crypto
 
 
 def wallet_selection(selected_value):
@@ -25,7 +25,7 @@ def get_user_input():
     currency = currency_input_box.value
 
     def compute_conversion(amount, coin, currency):
-        wallet = crypto.get_converter_cache('https://pro-api.coinmarketcap.com/v2/tools/price-conversion',
+        wallet = crypto.get_converter_cache('https://web-api.coinmarketcap.com/v2/tools/price-conversion',
                                             {'amount': amount, 'symbol': coin, 'convert': currency})
         amount, coin = wallet['data'][0]['amount'], wallet['data'][0]['name']
         conversion_output = Text(input_box, grid=[1, 4], text='')
@@ -38,7 +38,7 @@ def get_user_input():
             text_string = f'{amount} {coin} is {round(price, 2)} {currency}'
             conversion_output.append(text_string)
 
-        return amount, coin, currency, price
+            return amount, coin, currency, price
 
     compute_conversion(amount, coin, currency)
 
